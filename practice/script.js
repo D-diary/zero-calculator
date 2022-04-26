@@ -61,6 +61,7 @@
       }
       if (this.prevValue) {
         this.element.value = this.prevValue
+        return
       }
       this.element.value = 0
     }
@@ -129,12 +130,10 @@
   clearButton.addEventListener('click', () => {
     calculator.clear()
     calculator.updateDisplay()
-
   })
   
   allClearButton.addEventListener('click', () => {
     calculator.reset()
     calculator.updateDisplay()
-
   })
 })()
