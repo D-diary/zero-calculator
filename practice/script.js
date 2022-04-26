@@ -45,10 +45,36 @@
         element.classList.remove('active')
       })
     }
+    compute() {
+      let computation
+      const prev = parseFloat(this.prevValue)
+      const current = parseFloat(this.currentValue)
+      if (isNaN(prev) || isNaN(current)) return
+      switch (this.operation) {
+        case '+':
+          computation = prev + current
+          break
+        case '-':
+          computation = prev - current
+          break
+        case '*':
+          computation = prev * current
+          break
+        case '÷':
+          computation = prev / current
+          break
+        default:
+          return
+      }
+      this.currentValue = computation.toString()
+      this.prevValue = ''
+      this.resetOperation()
+    }
   }
 
   const numberButtons = getAll('.cell_button.number')
   const operationButtons = getAll('.cell_button.operation')
+  const computeButton = get('.cell_button.compute')
   const display = get('.display')
 
   const calculator = new Calculator(display)
@@ -65,5 +91,11 @@
       calculator.setOpertaion(button.innerText)
       calculator.updateDisplay()
     })
+  })
+
+  computeButton.addEventListener('click', () => {
+    calculator.compute()
+    calculator.updateDisplay()
+
   })
 })()
